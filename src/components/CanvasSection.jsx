@@ -1,7 +1,9 @@
-import { Canvas, extend, useThree } from '@react-three/fiber';
+import { Canvas, extend, useThree, useFrame } from '@react-three/fiber';
 import { useEffect, useRef } from 'react';
-import { Html, TransformControls, Center, useTexture, useGLTF, OrbitControls } from '@react-three/drei';
-import { OrthographicCamera} from 'three';
+import { Html, Center, useTexture, useGLTF, Loader } from '@react-three/drei';
+import { OrthographicCamera, Vector3 } from 'three';
+import { easing } from 'maath';
+
 
 extend({ OrthographicCamera }); // Make OrthographicCamera available as a JSX component
 
@@ -176,13 +178,9 @@ function Model() {
 
 
 
-
-
-
-
 function SetupCamera() {
   const cameraRef = useRef();
-  const { set, scene } = useThree();
+  const { set, viewport, mouse } = useThree();
 
   useEffect(() => {
     const aspectRatio = window.innerWidth / window.innerHeight;
@@ -199,43 +197,56 @@ function SetupCamera() {
     cameraRef.current.far = 105;
     cameraRef.current.updateProjectionMatrix();
 
-    // Rotate the camera to look at the origin
     cameraRef.current.lookAt(0, 0, 0);
+  }, [set]);
 
-  }, [set, scene]);
+  useFrame((state, delta) => {
+    if (cameraRef.current) {
+      // Convert mouse coordinates to world space position
+      let posX = -0.5 + (mouse.x * viewport.width);
+      let posY = (0.5 + mouse.y) / 0.2;
 
-  return (
-    <orthographicCamera
-      ref={cameraRef}
-      position={[-100, 0, 0]}
-    />
-  );
+      // Apply constraints
+      // Clamp posX to limit the camera movement to 180 degrees or a half-circle
+      const minPosX = -20;
+      const maxPosX = -20;
+      posX = Math.max(minPosX, Math.min(maxPosX, posX));
+
+      const position = [posX, posY, 0];
+
+      // Apply easing to the camera movement
+      easing.damp3(cameraRef.current.position, position, 0.4, delta);
+      cameraRef.current.lookAt(0, 0, 0);
+    }
+  });
+
+  return <orthographicCamera ref={cameraRef} position={[-100, 0, 0]} />;
 }
+
+
+
+
+
+
 
 
 export default function CanvasSection() {
-  const cameraRef = useRef();
-
   return (
-    <Canvas>
-      <color args={['#ffe94d']} attach="background" />
-      <SetupCamera />
-      <OrbitControls
-        ref={cameraRef}
-        enableZoom={false}
-        minAzimuthAngle = {-Math.PI / -1}
-        maxAzimuthAngle = {Math.PI / 100}
-        maxPolarAngle = { 1.6 }
-        minPolarAngle={ 1.5 }
-      />
-      <Model />
-      <Html 
-        wrapperClass='helperLabel'
-        position={[0, 1.55, -3.2]}
-        distanceFactor={ 1 }
+    <>
+      <Canvas className='canvas--actual'>
+        <color args={['#ffe94d']} attach="background" />
+        <SetupCamera />
+        <Model />
+        <Html 
+          wrapperClass='helperLabel'
+          position={[0, 1.55, -3.2]}
+          distanceFactor={1}
         >
-          Click & Drag to move around!
-      </Html>
-    </Canvas>
+          Move your cursor to explore!
+        </Html>
+      </Canvas>
+      <Loader />
+    </>
   );
 }
+

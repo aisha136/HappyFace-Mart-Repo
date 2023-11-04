@@ -49,11 +49,12 @@ body {
   background: #F4F4F4;
   padding-left: 70px;
   font-size: 19px;
+  margin: -5px 0px;
 }
 
 .middleDiv--button {
   width: 60px;
-  height: 40px;
+  height: 100%;
   border-radius: 20px;
   border: 2px solid #000;
   background: #E7FEBE;
@@ -62,6 +63,7 @@ body {
   justify-content: center;
   position: absolute;
   left: 6px;
+  padding: 0px;
 }
 
 .middleDiv--button:hover {
@@ -117,11 +119,10 @@ body {
 
 /* Canvas Div Styling */
 .canvasDiv {
-  height: 900px;
-  overflow: hidden;
+  height: 93vh;
   align-items: center;
-  display: flex;
 }
+
 
 
 
@@ -207,6 +208,7 @@ body {
   grid-template-columns: repeat(3, 1fr);
   gap: 50px;
   justify-content: center;
+  margin-left: 45px;
 }
 
 .SS--D2--Card {
@@ -219,8 +221,8 @@ body {
 }
 
 .SS--D2--Card--ImgArea {
-  width: 290px;
-  height: 290px;
+  width: 280px;
+  height: 280px;
   border-radius: 7px;
   border: 2px solid #000;
   background: #FFF;
@@ -280,7 +282,7 @@ body {
 }
 
 /* Responsive Design */
-@media (max-width: 992px) {
+@media (max-width: 1650px) {
 
   .SS--D1 {
     width: 100%;
@@ -337,7 +339,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 200px;
+  margin-bottom: 100px;
 }
 
 .cartArea--inside {
@@ -345,7 +347,7 @@ body {
 }
 
 .CartDiv {
-  width: fit-content;
+  width: 500px;
   border-radius: 11px;
   border: 2px solid #000;
   background: #F8F8F8;
@@ -354,7 +356,7 @@ body {
 }
 
 .CartDiv--Inside {
-  height: 500px;
+  height: fit-content;
   border-radius: 11px;
   border: 2px solid #777777;
   background: #FFF;
@@ -436,7 +438,7 @@ body {
 }
 
 /* Responsive Design */
-@media (max-width: 992px) {
+@media (max-width: 1800px) {
   .cartArea {
       margin: 0 50px 50px;
       flex-direction: column;
@@ -445,6 +447,10 @@ body {
 
   .CartDiv--Inside--CALC, .CartDiv {
       width: 100%;
+  }
+
+  .CartDiv {
+    margin-top: 40px;
   }
 
 }
@@ -519,7 +525,6 @@ body {
 @media (max-width: 1200px) {
   .cartLeftDiv--grid {
       grid-template-columns: repeat(2, 1fr);
-      align-self: center;
   }
 
   .cartLeftDiv {
@@ -573,7 +578,6 @@ body {
   text-align: center;
   white-space: nowrap;
 }
-
 
 
 
