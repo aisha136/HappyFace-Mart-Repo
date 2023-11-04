@@ -1,5 +1,5 @@
 import { Canvas, extend, useThree, useFrame } from '@react-three/fiber';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, Suspense} from 'react';
 import { Html, Center, useTexture, useGLTF, Loader } from '@react-three/drei';
 import { OrthographicCamera, Vector3 } from 'three';
 import { easing } from 'maath';
@@ -234,18 +234,38 @@ export default function CanvasSection() {
   return (
     <>
       <Canvas className='canvas--actual'>
-        <color args={['#ffe94d']} attach="background" />
-        <SetupCamera />
-        <Model />
-        <Html 
-          wrapperClass='helperLabel'
-          position={[0, 1.55, -3.2]}
-          distanceFactor={1}
-        >
-          Move your cursor to explore!
-        </Html>
+        <Suspense fallback={null}>
+          <color args={['#ffe94d']} attach="background" />
+          <SetupCamera />
+          <Model />
+          <Html 
+            wrapperClass='helperLabel'
+            position={[0, 1.55, -3.2]}
+            distanceFactor={1}
+          >
+            Move your cursor to explore!
+          </Html>
+        </Suspense>
       </Canvas>
-      <Loader />
+      <Loader
+        containerStyles={{
+          backgroundColor: 'white',
+          backdropFilter: 'blur(5px)'
+        }}
+        innerStyles={{ backgroundColor: '#ffb703' }}
+        barStyles={{
+          height: '10px',
+          borderRadius: '5px',
+          backgroundColor: '#ffb703'
+        }}
+        dataInterpolation={(progress) => `Loading: ${progress.toFixed(2)}%`}
+        dataStyles={{
+          color: '#ffb703',
+          fontSize: '1.2em',
+          fontWeight: 'bold'
+        }}
+        initialState={() => 0}
+      />
     </>
   );
 }
