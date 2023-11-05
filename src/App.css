@@ -129,7 +129,7 @@ body {
 /* Middle Section Divs */
 .SS {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .SS--D1 {
@@ -137,19 +137,20 @@ body {
   flex-direction: column;
   align-items: center;
   background: rgb(214, 255, 191);
-  padding: 10px 1px;
+  padding: 6px 1px;
   border-radius: 10px;
   height: fit-content;
+  margin-right: 7vw;
 }
 
 .SS--D1--Button,
 .SS--D1--BSelected {
-  width: 290px;
-  height: 120px;
+  width: 15vw;
+  height: 13vh;
   margin: 4px 10px;
   border-radius: 7px;
   border: 2px solid #818181;
-  font-size: 20px;
+  font-size: 21px;
   font-weight: 700;
   cursor: pointer;
 }
@@ -249,7 +250,7 @@ body {
 }
 
 .SS--D2--Card--PBDiv--Price {
-  font-size: 25px;
+  font-size: 23px;
   font-weight: 700;
   margin: 0;
 }
@@ -277,19 +278,21 @@ body {
 
 .focusArea {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   margin: 150px 200px 150px 200px;
 }
 
 /* Responsive Design */
-@media (max-width: 1650px) {
+
+
+
+@media (max-width: 1750px) {
 
   .SS--D1 {
     width: 100%;
   }
 
   .focusArea {
-    flex-direction: column;
     margin: 70px;
   }
 
@@ -298,12 +301,13 @@ body {
   }
 
   .SS--D1--BSelected, .SS--D1--Button {
-    width: 100%;
+    width: 17vw;
+    height: 13vh;
   }
 
   .SS--D1 {
-    padding: 10px 20px;
-    margin-bottom: 50px;
+    padding: 5px 0px;
+    margin: 0px;
   }
 
   .SS--D2--Card {
@@ -316,21 +320,81 @@ body {
 
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1000px) {
   .SS--D2 {
       grid-template-columns: 1fr;
   }
 
-  .SS--D2--Card--ImgArea, .SS--D2--Card--ImgArea--Img {
-      width: 100%;
-      height: auto;
+
+  .SS--D2--Card--ImgArea--Img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
   }
 
   .focusArea {
       margin: 100px 50px;
-      flex-direction: column;
+  }
+
+  .SS--D1 {
+    margin: 0px;
+    padding: 5px 0px;
+  }
+
+  .SS--D1--BSelected, .SS--D1--Button {
+    height: 10vh;
   }
 }
+
+@media (max-width: 855px) {
+
+  .SS--D2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .focusArea {
+    margin: 100px 50px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .SS--D2--Card {
+    height: fit-content;
+  }
+
+  .SS--D2--Card--ImgArea--Img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .SS--D1 {
+    width: 100%;
+    margin: 0px 0px 50px 0px;
+    padding: 5px 10px;
+  }
+
+  .SS--D1--BSelected, .SS--D1--Button {
+    width: 70vw;
+  }
+
+}
+
+
+@media (max-width: 760px) {
+  .SS--D2 {
+    grid-template-columns: 1fr;
+  }
+
+  .focusArea {
+    justify-self: center;
+  }
+}
+
+
 
 /* Cart Viewing Area */
 .cartArea {

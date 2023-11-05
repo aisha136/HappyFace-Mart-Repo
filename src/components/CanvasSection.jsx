@@ -1,7 +1,7 @@
 import { Canvas, extend, useThree, useFrame } from '@react-three/fiber';
 import { useEffect, useRef, Suspense} from 'react';
 import { Html, Center, useTexture, useGLTF, Loader } from '@react-three/drei';
-import { OrthographicCamera, Vector3 } from 'three';
+import { OrthographicCamera} from 'three';
 import { easing } from 'maath';
 
 
